@@ -1,7 +1,7 @@
 {% extends 'tracker/base.html' %}
 
 {% block content %}
-<h1>{% if form.instance.pk %}Edit Issue{% else %}Add Issue{% endif %}</h1>
+<h1 class="fst-italic" style="color: indigo;">{% if form.instance.pk %}Изменить задачу{% else %}Добавить задачу{% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     <div class="form-group">
