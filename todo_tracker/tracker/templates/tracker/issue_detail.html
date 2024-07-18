@@ -4,7 +4,7 @@
 <h1>{{ issue.summary }}</h1>
 <p>Заметка: {{ issue.description }}</p>
 <p>Статус: {{ issue.status }}</p>
-<p>Тип: {{ issue.types }}</p>
+<p>Тип: {{ issue.types.all|join:", " }}</p>
 <p>Создано: {{ issue.created_at }}</p>
 <p>Обновлено: {{ issue.updated_at }}</p>
 <a href="{% url 'issue_edit' issue.id %}" class="btn btn-primary">Редактировать</a>
