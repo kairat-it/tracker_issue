@@ -1,0 +1,12 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<h1>{{ issue.summary }}</h1>
+<p>{{ issue.description }}</p>
+<p>Status: {{ issue.status }}</p>
+<p>Type: {{ issue.type }}</p>
+<p>Created at: {{ issue.created_at }}</p>
+<p>Updated at: {{ issue.updated_at }}</p>
+<a href="{% url 'issue_edit' issue.id %}" class="btn btn-primary">Редактировать</a>
+<a href="{% url 'issue_delete' issue.id %}" class="btn btn-danger">Удалить</a>
+{% endblock %}
