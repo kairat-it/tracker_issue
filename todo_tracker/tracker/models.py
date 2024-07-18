@@ -16,6 +16,7 @@ class Type(models.Model):
 
 
 class Issue(models.Model):
+    objects = None
     summary = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT)
