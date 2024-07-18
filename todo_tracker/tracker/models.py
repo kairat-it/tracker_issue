@@ -1,18 +1,19 @@
 from django.db import models
 
+
 class Status(models.Model):
-    objects = None
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
 
 class Type(models.Model):
-    objects = None
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
 
 class Issue(models.Model):
     summary = models.CharField(max_length=255)
@@ -24,4 +25,3 @@ class Issue(models.Model):
 
     def __str__(self):
         return self.summary
-
