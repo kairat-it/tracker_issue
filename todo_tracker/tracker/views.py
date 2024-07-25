@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from .models import Issue
@@ -20,21 +21,21 @@ class IssueDetailView(DetailView):
     context_object_name = 'issue'
 
 
-class IssueCreateView(CreateView):
+class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
     template_name = 'tracker/issue_form.html'
     success_url = reverse_lazy('issue_list')
 
 
-class IssueUpdateView(UpdateView):
+class IssueUpdateView(LoginRequiredMixin, UpdateView):
     model = Issue
     form_class = IssueForm
     template_name = 'tracker/issue_form.html'
     success_url = reverse_lazy('issue_list')
 
 
-class IssueDeleteView(DeleteView):
+class IssueDeleteView(LoginRequiredMixin, DeleteView):
     model = Issue
     template_name = 'tracker/issue_confirm_delete.html'
     success_url = reverse_lazy('issue_list')
