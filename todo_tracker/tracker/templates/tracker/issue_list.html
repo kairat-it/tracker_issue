@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1>Список задач</h1>
+{% if is_paginated %}
+   {% include 'templates/partial/pagination.html' %}
+{% endif %}
 <table class="table table-striped">
     <thead>
         <tr>
@@ -27,4 +30,33 @@
         {% endfor %}
     </tbody>
 </table>
+{% if is_paginated %}
+   {% include 'templates/partial/pagination.html' %}
+{% endif %}
+<div class="pagination">
+    <span class="step-links">
+        <a href="?page=1">&laquo; В начало</a>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+        {% else %}
+            <span class="page-disabled">Назад</span>
+        {% endif %}
+
+        <form class="current-page" method="get" style="display:inline;">
+            <label for="page">
+                Страница <input type="text" name="page" id="page" value="{{ page_obj.number }}">
+                из {{ page_obj.paginator.num_pages }}.
+            </label>
+        </form>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Далее</a>
+        {% else %}
+            <span class="page-disabled">Далее</span>
+        {% endif %}
+        <a href="?page={{ page_obj.paginator.num_pages }}">В конец &raquo;</a>
+    </span>
+</div>
+
+
 {% endblock %}
