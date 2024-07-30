@@ -18,3 +18,6 @@ class IssueForm(forms.ModelForm):
             'status': forms.Select(attrs={'class': 'form-control'}),
             'types': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label="Найти")
