@@ -1,11 +1,12 @@
 from django import forms
-from .models import Issue, Status, Type
+from .models import Issue, Status, Type, Project
 
 
 class IssueForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), required=True, label="Проект")
     class Meta:
         model = Issue
-        fields = ['summary', 'description', 'status', 'types']
+        fields = ['project','summary', 'description', 'status', 'types']
         labels = {
             'summary': 'Описание',
             'description': 'Полное описание',

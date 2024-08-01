@@ -39,13 +39,10 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
     form_class = IssueForm
     template_name = 'tracker/issues/issue_form.html'
 
-    def form_valid(self, form):
-        project = get_object_or_404(Project, pk=self.kwargs['pk'])
-        form.instance.project = project
-        return super().form_valid(form)
-
     def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('project_list')
+
+
 
 
 class IssueUpdateView(LoginRequiredMixin, UpdateView):
