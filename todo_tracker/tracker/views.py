@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Issue, Project
 from .forms import IssueForm
 
@@ -36,8 +37,16 @@ class IssueDetailView(DetailView):
 class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
-    template_name = 'tracker/issue_form.html'
-    success_url = reverse_lazy('issue_list')
+    template_name = 'tracker/issues/issue_form.html'
+    fields = ['summary', 'description', 'status', 'types']
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs['pk'])
+        form.instance.project = project
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.kwargs['pk']})
 
 
 class IssueUpdateView(LoginRequiredMixin, UpdateView):
