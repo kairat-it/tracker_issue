@@ -8,7 +8,7 @@ from .forms import IssueForm
 
 class IssueListView(ListView):
     model = Issue
-    template_name = 'tracker/issue_list.html'
+    template_name = 'tracker/issues/issue_list.html'
     context_object_name = 'issues'
     paginate_by = 3
 
@@ -30,7 +30,7 @@ class IssueListView(ListView):
 
 class IssueDetailView(DetailView):
     model = Issue
-    template_name = 'tracker/issue_detail.html'
+    template_name = 'tracker/issues/issue_detail.html'
     context_object_name = 'issue'
 
 
@@ -38,7 +38,6 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
     template_name = 'tracker/issues/issue_form.html'
-    fields = ['summary', 'description', 'status', 'types']
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs['pk'])
@@ -52,13 +51,13 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
 class IssueUpdateView(LoginRequiredMixin, UpdateView):
     model = Issue
     form_class = IssueForm
-    template_name = 'tracker/issue_form.html'
+    template_name = 'tracker/issues/issue_form.html'
     success_url = reverse_lazy('issue_list')
 
 
 class IssueDeleteView(LoginRequiredMixin, DeleteView):
     model = Issue
-    template_name = 'tracker/issue_confirm_delete.html'
+    template_name = 'tracker/issues/issue_confirm_delete.html'
     success_url = reverse_lazy('issue_list')
 
 
