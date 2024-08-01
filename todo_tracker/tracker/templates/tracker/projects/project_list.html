@@ -1,0 +1,24 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<h1>Список проектов</h1>
+
+<form method="get" action=".">
+    <input type="text" name="q" placeholder="Поиск по проектам" value="{{ search_query }}">
+    <button type="submit" class="btn btn-primary">Поиск</button>
+</form>
+
+{% if projects %}
+    <ul>
+    {% for project in projects %}
+        <li><a href="{% url 'project_detail' project.id %}">{{ project.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% else %}
+    <p>Проекты не найдены</p>
+{% endif %}
+{% endblock %}
