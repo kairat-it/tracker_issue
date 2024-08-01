@@ -26,7 +26,6 @@ class Project(models.Model):
 
 
 class Issue(models.Model):
-    objects = None
     project = models.ForeignKey(Project, on_delete=models.CASCADE, default=1)
     summary = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
